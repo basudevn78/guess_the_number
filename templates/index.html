@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Number Guessing Game</title>
+
+    <!-- CSS Styling -->
+    <style>
+        /* Body Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Heading Styling */
+        h1 {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Form Container Styling */
+        form {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Input Fields Styling */
+        input[type="number"], input[type="text"] {
+            width: 250px;
+            padding: 12px;
+            margin: 10px;
+            border: 2px solid #74ebd5;
+            border-radius: 10px;
+            font-size: 18px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        /* Focus effect on input fields */
+        input[type="number"]:focus, input[type="text"]:focus {
+            border-color: #ACB6E5;
+            background-color: #f0f8ff;
+        }
+
+        /* Buttons Styling */
+        button {
+            width: 200px;
+            padding: 12px;
+            margin: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: #74ebd5;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        /* Button Hover Effect */
+        button:hover {
+            background: #4fc3f7;
+        }
+
+        /* Quit Button Specific Styling */
+        button[name="quit"] {
+            background: #ff6b6b;
+        }
+        button[name="quit"]:hover {
+            background: #ff4c4c;
+        }
+
+        /* Message Styling */
+        .message {
+            font-size: 22px;
+            margin: 20px;
+            color: #333;
+        }
+
+        /* Stats Section Styling */
+        .stats {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #1d3557;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Main Heading -->
+<h1>Number Guessing Game</h1>
+
+<!-- Guess Input Form -->
+<form method="POST">
+    <input type="number" name="guess" placeholder="Enter your guess" required>
+    <button type="submit">Submit Guess</button>
+    <button type="submit" name="quit" value="1">Quit</button>
+</form>
+
+<!-- Message Display Section -->
+<div class="message">{{ message }}</div>
+
+<!-- Attempts and High Score Stats Section -->
+<div class="stats">
+    <p>Attempts: {{ attempts }}</p>
+    {% if high_score %}
+    <p>High Score (lowest attempts): {{ high_score }}</p>
+    {% endif %}
+</div>
+
+<!-- Feedback Form (only shown when game is over) -->
+{% if game_over %}
+    <form method="POST" action="/feedback">
+        <input type="text" name="feedback" placeholder="Please give your feedback" required>
+        <button type="submit">Submit Feedback</button>
+    </form>
+{% endif %}
+
+</body>
+</html>
